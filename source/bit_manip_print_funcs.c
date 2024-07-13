@@ -46,6 +46,7 @@ void print_bits( union byte_bits byte_in, int end_bit, int start_bit)
 
 void word_print_bits(int in_word)
 {
+    printf("\t");
     print_bits(
             (union byte_bits)(uint8_t)(in_word >> (CHAR_BIT * 3)),
             CHAR_BIT,
@@ -67,9 +68,9 @@ void word_print_bits(int in_word)
 
 void print_bit_patterns( union byte_bits byte_in, char *byte_name)
 {
-    printf("%s.bit_byte = 0x%02X\n", byte_name, byte_in.bit_byte);
+    printf("\t%s.bit_byte = 0x%02X\n", byte_name, byte_in.bit_byte);
 #if 1
-    printf("%s.bits ", byte_name);
+    printf("\t%s.bits ", byte_name);
     print_bits(byte_in, CHAR_BIT, 0);
 #else
     printf("%s.bits %01x", byte_name, byte_in.bits.bit1);
@@ -82,7 +83,7 @@ void print_bit_patterns( union byte_bits byte_in, char *byte_name)
     printf("%01x\n", byte_in.bits.bit8);
 #endif
     printf("\n");
-    printf("%s.nibble %01x", byte_name, byte_in.nibble.nib_high);
+    printf("\t%s.nibble %01x", byte_name, byte_in.nibble.nib_high);
     printf("%01x\n", byte_in.nibble.nib_low);
 
 }

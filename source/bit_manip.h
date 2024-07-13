@@ -30,8 +30,6 @@ union byte_bits {
 static inline void pause_display_output(int delay)
 {
     for (int i = 0; i < delay; i++) {
-        putchar('.');
-        fflush(stdout);
         sleep(1);
     }
 }

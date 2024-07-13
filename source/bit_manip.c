@@ -18,20 +18,21 @@ int main(void)
 
     // print the initial state of each union.
     printf("Initial state of each union.\n");
-    printf("****************************************\n");
+    printf("*****************************\n");
     print_bit_patterns(byte__a, "byte__a");
     print_bit_patterns(byte__b, "byte__b");
     printf("\n");
 
-//**********************************************************
-printf("a-b pattern byte swap.\n");
-//**********************************************************
+    //**********************************************************
+    printf("a-b pattern byte swap.\n");
+    printf("***********************\n");
+    //**********************************************************
     // print the initial value of each pattern byte.
-    printf("Initial value of each pattern byte. \n");
-    printf("****************************************\n");
-    printf("bit_pata = 0x%02X\n", bit_pata);
-    printf("bit_patb = 0x%02X\n", bit_patb);
-    printf("a-b swap in place using XOR.\n");
+    printf("\tInitial value of each pattern byte.\n");
+    printf("\t************************************\n");
+    printf("\tbit_pata = 0x%02X\n", bit_pata);
+    printf("\tbit_patb = 0x%02X\n", bit_patb);
+    printf("\ta-b swap in place using XOR.\n");
     printf("\n");
 
     // swap the bit patterns.
@@ -40,23 +41,24 @@ printf("a-b pattern byte swap.\n");
     bit_pata ^= bit_patb;
 
     // print the swapped value of each pattern byte.
-    printf("Swapped value of each pattern byte.\n");
-    printf("****************************************\n");
-    printf("bit_pata = 0x%02X\n", bit_pata);
-    printf("bit_patb = 0x%02X\n", bit_patb);
+    printf("\tSwapped value of each pattern byte.\n");
+    printf("\t************************************\n");
+    printf("\tbit_pata = 0x%02X\n", bit_pata);
+    printf("\tbit_patb = 0x%02X\n", bit_patb);
     printf("\n");
 
     pause_display_output(2);
 
-//**********************************************************
-printf("a-b byte swaps.\n");
-//**********************************************************
+    //**********************************************************
+    printf("a-b byte swaps.\n");
+    printf("****************\n");
+    //**********************************************************
     // print the initial value of each pattern bit_byte.
-    printf("Print the initial value of each pattern bit_byte.\n");
-    printf("****************************************\n");
-    printf("byte__a.bit_byte = 0x%02X\n", byte__a.bit_byte);
-    printf("byte__b.bit_byte = 0x%02X\n", byte__b.bit_byte);
-    printf("a-b swap in place using XOR.\n");
+    printf("\tPrint the initial value of each pattern bit_byte.\n");
+    printf("\t**************************************************\n");
+    printf("\tbyte__a.bit_byte = 0x%02X\n", byte__a.bit_byte);
+    printf("\tbyte__b.bit_byte = 0x%02X\n", byte__b.bit_byte);
+    printf("\ta-b swap in place using XOR.\n");
     printf("\n");
 
     // swap the bit_byte.
@@ -65,25 +67,26 @@ printf("a-b byte swaps.\n");
     byte__a.bit_byte ^= byte__b.bit_byte;
 
     // print the swapped value of each bit_byte.
-    printf("Print the swapped value of each bit_byte.\n");
-    printf("****************************************\n");
-    printf("byte__a.bit_byte = 0x%02X\n", byte__a.bit_byte);
-    printf("byte__b.bit_byte = 0x%02X\n", byte__b.bit_byte);
+    printf("\tPrint the swapped value of each bit_byte.\n");
+    printf("\t******************************************\n");
+    printf("\tbyte__a.bit_byte = 0x%02X\n", byte__a.bit_byte);
+    printf("\tbyte__b.bit_byte = 0x%02X\n", byte__b.bit_byte);
     printf("\n");
 
     // print the current state of each union.
-    printf("Print the current state of each union. \n");
-    printf("****************************************\n");
+    printf("\tPrint the current state of each union. \n");
+    printf("\t****************************************\n");
     print_bit_patterns(byte__a, "byte__a");
     print_bit_patterns(byte__b, "byte__b");
     printf("\n");
 
-//**********************************************************
-printf("a-b nibble swaps.\n");
-//**********************************************************
+    //**********************************************************
+    printf("a-b nibble swaps.\n");
+    printf("******************\n");
+    //**********************************************************
     // swap high nibble.
-    printf("a-b swap high nibble in place using XOR.\n");
-    printf("****************************************\n");
+    printf("\ta-b swap high nibble in place using XOR.\n");
+    printf("\t*****************************************\n");
     byte__a.nibble.nib_high ^= byte__b.nibble.nib_high;
     byte__b.nibble.nib_high ^= byte__a.nibble.nib_high;
     byte__a.nibble.nib_high ^= byte__b.nibble.nib_high;
@@ -93,8 +96,8 @@ printf("a-b nibble swaps.\n");
     printf("\n");
 
     // swap low nibble.
-    printf("a-b swap low nibble in place using XOR.\n");
-    printf("****************************************\n");
+    printf("\ta-b swap low nibble in place using XOR.\n");
+    printf("\t****************************************\n");
     byte__a.nibble.nib_low ^= byte__b.nibble.nib_low;
     byte__b.nibble.nib_low ^= byte__a.nibble.nib_low;
     byte__a.nibble.nib_low ^= byte__b.nibble.nib_low;
@@ -105,9 +108,10 @@ printf("a-b nibble swaps.\n");
     pause_display_output(5);
     printf("\n");
 
-//**********************************************************
-printf("???\n");
-//**********************************************************
+    //**********************************************************
+    printf("???\n");
+    printf("****************************************\n");
+    //**********************************************************
     bit_total = 0;
 
     for (bit_count = 0; bit_count < CHAR_BIT; bit_count++) {
@@ -118,32 +122,31 @@ printf("???\n");
         bit_total += (bit_patb >> bit_count) & 1;
     }
 
-    printf("bit_total = %d, avrg = %d\n",  bit_total, bit_total >> 1);
+    printf("\tbit_total = %d, avrg = %d\n",  bit_total, bit_total >> 1);
 
-    printf("bit_pata = 0x%02X\n",  bit_pata & ((1 << NIBBLE_BIT) - 1) );
-    printf("bit_patb = 0x%02X\n",  bit_patb );
+    printf("\tbit_pata = 0x%02X\n",  bit_pata & ((1 << NIBBLE_BIT) - 1) );
+    printf("\tbit_patb = 0x%02X\n",  bit_patb );
 
-    printf("%ld\n", (uint64_t)(1 << NIBBLE_BIT) - 1);
-    printf("%ld\n", (uint64_t)~(~0 << NIBBLE_BIT));
+    printf("\t%ld\n", (uint64_t)(1 << NIBBLE_BIT) - 1);
+    printf("\t%ld\n", (uint64_t)~(~0 << NIBBLE_BIT));
 
     int out_word = 0xFF;
 
     pause_display_output(2);
     printf("\n");
 
-    printf("\n\n************************************************************\n");
     printf("Set Bits\n");
-    printf("************************************************************\n");
+    printf("*********\n");
     setbits(&out_word, 3, 3, 0x32);
+    printf("\n");
 
-    printf("\n\n************************************************************\n");
     printf("Invert Bits\n");
-    printf("************************************************************\n");
+    printf("************\n");
     invert(-1, 8, 3);
+    printf("\n");
 
-    printf("\n\n************************************************************\n");
     printf("Rotate Right Bits\n");
-    printf("************************************************************\n");
+    printf("******************\n");
     rightrot_bits(0x7F7F7F7FU);
 
 }
