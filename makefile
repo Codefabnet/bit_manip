@@ -40,6 +40,7 @@ BIT_MANIP_OBJECTS := $(addprefix $(OBJDIR)/, \
              bit_manip.o \
              bit_manip_funcs.o \
              bit_manip_print_funcs.o \
+             bit_manip_algorithms.o \
 	     )
 
 BIT_MANIP_HEADERS := $(BIT_MANIP_DIR)/bit_manip.h
