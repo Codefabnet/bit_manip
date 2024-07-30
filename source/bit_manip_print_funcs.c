@@ -1,79 +1,119 @@
 #include <stdio.h>
 #include "bit_manip.h"
 
+
+//*****************************************************************************
+// Function: print_bits
+//
+// Description: Print the bitfield of the given byte, as defined by the start 
+//              and end parameters.
+//
+// Parameters: byte_in - Union with bitfields defined for the given byte.
+//             end_bit - MSB of the given bitfield.
+//             start_bit - LSB of the given bitfield.
+//
+// Return: void
+//
+//*****************************************************************************
 void print_bits( union byte_bits byte_in, int end_bit, int start_bit)
 {
+   // Right justify based on the pattern end bit position.
    for (int i = 0; i < (CHAR_BIT - end_bit); i++)
       printf(" ");
 
+   // Print bits in the union, starting with the end bit position, falling
+   // through to the next bit until reaching the start bit.
    switch (end_bit) {
-      case 8:
-       printf("%01x", byte_in.bits.bit8);
-       if (8 <= start_bit)
+
+#define case_macro(bitp) \
+       case bitp: \
+           printf("%01x", byte_in.bits.bit##bitp); \
+           if (bitp <= start_bit) \
+              break;
+
+       // One case statement for each bit
+       case_macro(8)
+       case_macro(7)
+       case_macro(6)
+       case_macro(5)
+       case_macro(4)
+       case_macro(3)
+       case_macro(2)
+       case_macro(1)
+#undef case_macro
+
+       default:
           break;
-      case 7:
-       printf("%01x", byte_in.bits.bit7);
-       if (7 <= start_bit)
-          break;
-      case 6:
-       printf("%01x", byte_in.bits.bit6);
-       if (6 <= start_bit)
-          break;
-      case 5:
-       printf("%01x", byte_in.bits.bit5);
-       if (5 <= start_bit)
-          break;
-      case 4:
-       printf("%01x", byte_in.bits.bit4);
-       if (4 <= start_bit)
-          break;
-      case 3:
-       printf("%01x", byte_in.bits.bit3);
-       if (3 <= start_bit)
-          break;
-      case 2:
-       printf("%01x", byte_in.bits.bit2);
-       if (2 <= start_bit)
-          break;
-      case 1:
-       printf("%01x", byte_in.bits.bit1);
-       break;
-      default:
-       break;
    }
 
 }
 
-void word_print_bits(int in_word)
+
+//*****************************************************************************
+// Function: word_print_bits
+//
+// Description: Prints the ones and zeroes bit pattern for the given word.
+//
+// Parameters: in_word - The word to print.
+//
+// Return: void
+//
+//*****************************************************************************
+void word_print_bits(uint32_t in_word)
 {
+
+#define print_macro(i) \
+    print_bits((union byte_bits)(uint8_t)(in_word >> (CHAR_BIT * i)), \
+            CHAR_BIT, \
+            0);
+
+    // print the bit pattern for each byte in the given word.
     printf("\t");
-    print_bits(
-            (union byte_bits)(uint8_t)(in_word >> (CHAR_BIT * 3)),
-            CHAR_BIT,
-            0);
-    print_bits(
-            (union byte_bits)(uint8_t)(in_word >> (CHAR_BIT * 2)),
-            CHAR_BIT,
-            0);
-    print_bits(
-            (union byte_bits)(uint8_t)(in_word >> CHAR_BIT),
-            CHAR_BIT,
-            0);
-    print_bits(
-            (union byte_bits)(uint8_t)in_word,
-            CHAR_BIT,
-            0);
+    print_macro(3);
+    print_macro(2);
+    print_macro(1);
+    print_macro(0);
+#undef print_macro
+
     printf("\n");
 }
 
+
+//*****************************************************************************
+// Function: print_bit_patterns
+//
+// Description: Prints the different number representations in
+//              the byte_bits union.
+//
+// Parameters: byte_in - the union byte_bits object to print.
+//
+// Return: void
+//
+//*****************************************************************************
 void print_bit_patterns( union byte_bits byte_in, char *byte_name)
 {
     printf("\t%s:\n", byte_name);
     printf("\t\tbit_byte = 0x%02X\n", byte_in.bit_byte);
-    printf("\t\tnibbles  =   %01X", byte_in.nibble.nib_high);
-    printf("%01X\n", byte_in.nibble.nib_low);
     printf("\t\tbits = ");
     print_bits(byte_in, CHAR_BIT, 0);
     printf("\n");
+
+}
+
+//*****************************************************************************
+// Function: print_nibbles
+//
+// Description: Prints the high and low nibbles of the byte_bits union.
+//
+// Parameters: byte_in - the union byte_bits object to print.
+//
+// Return: void
+//
+//*****************************************************************************
+void print_nibbles( union byte_bits byte_in, char *byte_name)
+{
+    printf("\t%s: high/low nibble", byte_name);
+    printf("\t%01X", byte_in.nibble.nib_high);
+    printf("/%01X\n", byte_in.nibble.nib_low);
 
 }
