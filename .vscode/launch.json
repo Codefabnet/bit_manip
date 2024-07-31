@@ -8,9 +8,18 @@
             "type": "cppdbg",
             "name": "Launch",
             "request": "launch",
-            "preLaunchTask": "make",
+            "preLaunchTask": "build",
             "cwd": ".",
-            "program": "${workspaceRoot}/output/${fileBasenameNoExtension}",
+            "program": "${workspaceRoot}/output/bit_manip",
+            "args": []
+        },
+        {
+            "type": "cppdbg",
+            "name": "Launch Multi",
+            "request": "launch",
+            "preLaunchTask": "build multi",
+            "cwd": ".",
+            "program": "${workspaceRoot}/output/bit_manip",
             "args": []
         }
     ]

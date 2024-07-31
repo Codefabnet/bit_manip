@@ -10,9 +10,9 @@
 //*****************************************************************************
 // Function: main
 //
-// Description: 
+// Description:
 //
-// Parameters: 
+// Parameters:
 //
 // Return: 
 //
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     do {
           rval = ptr_func[func]();
-          if (0 == rval) {
+          if ((0 == rval) || (10 == rval)) {
               func += 1;
               continue;
           }

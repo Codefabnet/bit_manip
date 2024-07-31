@@ -1,15 +1,55 @@
 {
     "tasks": [
         {
-            "label": "make",
+            "label": "make clean",
             "type": "shell",
-            "command": "make ${fileBasenameNoExtension}",
+            "command": "make",
+            "args": ["clean"],
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
 
             }
+        },
+        {
+            "label": "make multi",
+            "type": "shell",
+            "command": "make",
+            "args": ["MULTI_FLAG=-DMULTI_PASS_TESTS"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+
+            }
+        },
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "make",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+
+            }
+        },
+        {
+            "label": "build multi",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "make clean",
+                "make multi"
+            ]
+        },
+        {
+            "label": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "make clean",
+                "make"
+            ]
         }
     ],
     "version": "2.0.0"

@@ -43,7 +43,65 @@ uint32_t pause_for_input(int delay)
 
 }
 
+uint32_t run_all()
+{
+    return 99;
+}
 
+
+
+#if defined(MULTI_PASS_TESTS)
+uint32_t out_wordx0 = 0xFF;
+uint32_t out_wordx1 = 0xF7;
+
+bit_desc_t  bit_parm4x0 = {&out_wordx0, 3, 3, 0x32};
+bit_desc_t  bit_parm4x1 = {&out_wordx1, 0, 4, 0xF4};
+bit_desc_t  bit_parm5x0 = {0, 0, 4, 0xFF};
+bit_desc_t  bit_parm6x0 = {0, 0, 0, 0x7F7F7F7F};
+
+bit_desc_t  *bit_parm1[] = {NULL};
+bit_desc_t  *bit_parm2[] = {NULL};
+bit_desc_t  *bit_parm3[] = {NULL};
+bit_desc_t  *bit_parm4[] = {&bit_parm4x0, &bit_parm4x1, NULL};
+bit_desc_t  *bit_parm5[] = {&bit_parm5x0, NULL};
+bit_desc_t  *bit_parm6[] = {&bit_parm6x0, NULL};
+#define ALGO_FUNC_LIST \
+    ALGO_FUNC_CALL(1, pattern_byte_swap, "pattern_byte_swap.") \
+    ALGO_FUNC_CALL(2, byte_swap, "byte_swap.") \
+    ALGO_FUNC_CALL(3, nibble_swap_two_bytes, "nibble_swap_two_bytes.") \
+    ALGO_FUNC_CALL(4, set_bits, "set_bits.") \
+    ALGO_FUNC_CALL(5, invert_bits, "invert_bits.") \
+    ALGO_FUNC_CALL(6, rotate_bits, "rotate_bits.  -->  <--")
+
+#define ALGO_FUNC_CALL(func_id, name, label) \
+    uint32_t algo_func##func_id() \
+    { \
+       printf("==========================\n"); \
+       printf("| %s\n", label); \
+       printf("==========================\n"); \
+       printf("\n"); \
+       uint32_t idx = 0; \
+       do { \
+          name(bit_parm##func_id[idx]); \
+          printf("\n"); \
+          idx++; \
+       } while (bit_parm##func_id[idx]); \
+       return pause_for_input(10); \
+    }
+
+    ALGO_FUNC_LIST
+#undef ALGO_FUNC_CALL
+
+uint32_t (* ptr_func[])() = {
+    run_all,
+#define ALGO_FUNC_CALL(func_id, name, label) \
+    algo_func##func_id,
+    ALGO_FUNC_LIST
+#undef ALGO_FUNC_CALL
+    NULL
+};
+
+#else
 
 #define ALGO_FUNC_LIST \
     ALGO_FUNC_CALL(1, 0, 0, 0, 0, pattern_byte_swap, "pattern_byte_swap.") \
@@ -75,21 +133,13 @@ uint32_t pause_for_input(int delay)
     ALGO_FUNC_LIST
 #undef ALGO_FUNC_CALL
 
-
-uint32_t run_all()
-{
-    return 99;
-}
-
-
 uint32_t (* ptr_func[])() = {
     run_all,
 #define ALGO_FUNC_CALL(func_id, output, pos, width, input, name, label) \
     algo_func##func_id,
-
-ALGO_FUNC_LIST
+    ALGO_FUNC_LIST
 #undef ALGO_FUNC_CALL
     NULL
 };
-
+#endif
 

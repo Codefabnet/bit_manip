@@ -5,7 +5,7 @@
 //*****************************************************************************
 // Function: print_bits
 //
-// Description: Print the bitfield of the given byte, as defined by the start 
+// Description: Print the bitfield of the given byte, as defined by the start
 //              and end parameters.
 //
 // Parameters: byte_in - Union with bitfields defined for the given byte.

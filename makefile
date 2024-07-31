@@ -3,7 +3,7 @@
 # All targets
 ############################################################
 
-TARGETS := bit_manip 
+TARGETS := bit_manip
 
 ############################################################
 # Common build rules
@@ -12,7 +12,8 @@ OBJDIR := ./obj
 OUTPUTDIR := ./output
 SOURCEDIR := ./source
 
-COMPILEFLAGS := -g -Wall
+#COMPILEFLAGS := -g -Wall -DMULTI_PASS_TESTS
+COMPILEFLAGS := -g -Wall $(MULTI_FLAG)
 #COMPILEFLAGS += -ffunction-sections
 #LINKERFLAGS := -Wl,-Map=$(OUTPUTDIR)/out.map
 #LINKERFLAGS += -Wl,--print-map>$(OUTPUTDIR)/outmap.txt
