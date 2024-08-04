@@ -10,31 +10,45 @@
 //*****************************************************************************
 // Function: main
 //
-// Description:
+// Description: Call various bit manipulation exercises by function index.
 //
-// Parameters:
+// Parameters: Standard executable parameters, argv[1] contains a function
+//             index, if valid.
 //
-// Return: 
+// Return: Status code, hard coded to return 0 (SUCCESS)
 //
 //*****************************************************************************
 int main(int argc, char *argv[])
 {
-    uint32_t func = FIRST_ALGO_FUNC;
+    uint32_t func_idx = FIRST_ALGO_FUNC;
     uint32_t rval = 0;
 
     if (2 <= argc) {
-        func = (strtol(argv[1], NULL, 10));
+        func_idx = (strtol(argv[1], NULL, 10));
+
+        // check for input in range.
+        if ((RUN_ALL >= func_idx) || (LAST_ALGO_FUNC < func_idx)) {
+            func_idx = FIRST_ALGO_FUNC;
+        }
     }
 
     do {
-          rval = ptr_func[func]();
+          // call the indexed function, which returns the next function index.
+          rval = ptr_func[func_idx]();
+
+          // check special cases that simply increment the function index.
           if ((0 == rval) || (10 == rval)) {
-              func += 1;
+              func_idx += 1;
               continue;
           }
-          func = rval - 0x30;
 
-    } while((RUN_ALL <= func) && (LAST_ALGO_FUNC >= func));
+          // adjust ascii number, the while condition will validate.
+          func_idx = rval - 0x30;
+
+    // use the function index if valid.
+    } while((RUN_ALL <= func_idx) && (LAST_ALGO_FUNC >= func_idx));
+
+    return 0;
 }
 
 

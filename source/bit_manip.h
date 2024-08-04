@@ -25,7 +25,7 @@ union byte_bits {
     struct {
         uint8_t nib_low  : 4;
         uint8_t nib_high : 4;
-    }nibble;
+    } nibble;
 
     uint8_t bit_byte;
 };

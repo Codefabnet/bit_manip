@@ -6,6 +6,24 @@
     "configurations": [
         {   
             "type": "cppdbg",
+            "name": "CMake Launch",
+            "request": "launch",
+            "preLaunchTask": "CMake build",
+            "cwd": ".",
+            "program": "${workspaceRoot}/build/output/Bit_Manip",
+            "args": []
+        },
+        {   
+            "type": "cppdbg",
+            "name": "CMake Launch Multi",
+            "request": "launch",
+            "preLaunchTask": "CMake build",
+            "cwd": ".",
+            "program": "${workspaceRoot}/build/output/Bit_Manip_Multi",
+            "args": []
+        },
+        {   
+            "type": "cppdbg",
             "name": "Launch",
             "request": "launch",
             "preLaunchTask": "build",

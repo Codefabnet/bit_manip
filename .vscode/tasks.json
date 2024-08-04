@@ -1,6 +1,18 @@
 {
     "tasks": [
         {
+            "label": "CMake clean",
+            "type": "shell",
+            "command": "make",
+            "args": ["-C", "build", "clean"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+
+            }
+        },
+        {
             "label": "make clean",
             "type": "shell",
             "command": "make",
@@ -17,6 +29,18 @@
             "type": "shell",
             "command": "make",
             "args": ["MULTI_FLAG=-DMULTI_PASS_TESTS"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+
+            }
+        },
+        {
+            "label": "CMake",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "build"],
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -49,6 +73,14 @@
             "dependsOn": [
                 "make clean",
                 "make"
+            ]
+        },
+        {
+            "label": "CMake build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "CMake clean",
+                "CMake"
             ]
         }
     ],

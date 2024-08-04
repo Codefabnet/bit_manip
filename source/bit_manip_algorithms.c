@@ -194,7 +194,8 @@ void nibble_swap_one_byte(bit_desc_t *bit_desc)
 // Description: For the given word, replace the bit field at the given width
 //              and position with the given bits.
 //
-// Parameters: out_word - Pointer to the word receiving the substitution.
+// Parameters: Members of the bit_desc struct parameter:
+//             out_word - Pointer to the word receiving the substitution.
 //             offset      - The starting offset for the substitution.
 //             num_bits - The number of bits to replace.
 //             in_word  - The word containing the bits to use in the
@@ -305,7 +306,8 @@ void set_bits(bit_desc_t *bit_desc)
 //
 // Description: invert the num_bits starting at offset for the input word.
 //
-// Parameters: in_word  - The word to change.
+// Parameters: members of the bit_desc struct parameter.
+//             in_word  - The word to change.
 //             offset   - The start position for the change, beginning at LSB.
 //             num_bits - The width of the change field.
 //
@@ -355,9 +357,10 @@ void invert_bits(bit_desc_t *bit_desc)
 //
 // Description:
 //
-// Parameters:
+// Parameters: Members of the bit_desc struct parameter:
+//             in_word  - The word to rotate.
 //
-// Return:
+// Return: void
 //
 //**************************************************************************
 void rotate_bits(bit_desc_t *bit_desc)

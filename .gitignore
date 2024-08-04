@@ -2,6 +2,7 @@
 *.sw*
 *.mks
 tags
+/build/
 /output/
 /CMakeFiles/
 CMakeCache.txt

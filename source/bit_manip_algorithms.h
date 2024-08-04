@@ -21,10 +21,10 @@ enum algo_funcs {
 };
 
 typedef struct bit_desc {
-    uint32_t *const out_word;
-    const uint32_t offset;
-    const uint32_t num_bits;
-    uint32_t in_word;
+    uint32_t *const out_word;  // pointer to the word being modified.
+    const uint32_t offset;     // position of the modification.
+    const uint32_t num_bits;   // number of bits being modified.
+    uint32_t in_word;          // bit donor or single word operand.
 } bit_desc_t;
 
 // Function pointer array of exercises.
